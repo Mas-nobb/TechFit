@@ -1,0 +1,56 @@
+<%= render "shared/header" %>
+<h1>適性診断結果</h1>
+
+<p id="result"></p>
+  <%= render 'shared/footer'%>
+
+<script>
+window.onload = function() {
+  const scores = calculateScores();
+  const maxScoreJob = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+  const resultElement = document.getElementById("result");
+  resultElement.textContent = `あなたに最も適している職業は${maxScoreJob}です！`;
+
+  function calculateScores() {
+    const scores = {
+      "ソフトウェア開発者/エンジニア": 0,
+      "データサイエンティスト/アナリスト": 0,
+      "ITコンサルタント": 0,
+      "システム管理者/ネットワークエンジニア": 0,
+      "サイバーセキュリティアナリスト": 0,
+      "UX/UIデザイナー": 0,
+      "プロジェクトマネージャ": 0,
+    };
+
+    for (let i = 0; i < 6; i++) {
+      const key = `question_${i}`;
+      const score = parseInt(localStorage.getItem(key), 10);
+
+      switch (i) {
+        case 0:
+        case 1:
+        case 5:
+          scores["ソフトウェア開発者/エンジニア"] += score;
+          scores["システム管理者/ネットワークエンジニア"] += score;
+          scores["サイバーセキュリティアナリスト"] += score;
+          break;
+        case 2:
+          scores["データサイエンティスト/アナリスト"] += score;
+          scores["ITコンサルタント"] += score;
+          break;
+        case 3:
+          scores["UX/UIデザイナー"] += score;
+          scores["ソフトウェア開発者/エンジニア"] += score;
+          break;
+        case 4:
+          scores["プロジェクトマネージャ"] += score;
+          scores["ITコンサルタント"] += score;
+          break;
+      }
+    }
+
+    return scores;
+  }
+};
+</script>

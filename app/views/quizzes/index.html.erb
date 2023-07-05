@@ -1,0 +1,59 @@
+<%= render "shared/header" %>
+<h1>IT適性診断テスト</h1>
+
+<p>以下の質問に回答して、あなたに適したIT職業を見つけましょう。</p>
+
+<div id="quiz">
+  <h2 id="question"></h2>
+
+  <div id="answer-buttons">
+    <button id="button-1">1（全く当てはまらない）</button>
+    <button id="button-2">2（あまり当てはまらない）</button>
+    <button id="button-3">3（どちらとも言えない）</button>
+    <button id="button-4">4（まあまあ当てはまる）</button>
+    <button id="button-5">5（非常に当てはまる）</button>
+  </div>
+</div>
+
+<%= render 'shared/footer'%>
+
+<script>
+document.addEventListener("turbo:load", function() {
+
+  const questions = <%= raw @questions.to_json %>;
+  let currentQuestionIndex = 0;
+
+  function displayQuestion() {
+    const questionElement = document.getElementById("question");
+    const currentQuestion = questions[currentQuestionIndex];
+    questionElement.textContent = currentQuestion.question;
+  }
+
+  displayQuestion();
+
+  const button1 = document.getElementById("button-1");
+  const button2 = document.getElementById("button-2");
+  const button3 = document.getElementById("button-3");
+  const button4 = document.getElementById("button-4");
+  const button5 = document.getElementById("button-5");
+
+  button1.addEventListener("click", () => { handleAnswer(1); });
+  button2.addEventListener("click", () => { handleAnswer(2); });
+  button3.addEventListener("click", () => { handleAnswer(3); });
+  button4.addEventListener("click", () => { handleAnswer(4); });
+  button5.addEventListener("click", () => { handleAnswer(5); });
+
+  function handleAnswer(score) {
+    const key = `question_${currentQuestionIndex}`;
+    localStorage.setItem(key, score);
+
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < questions.length) {
+      displayQuestion();
+    } else {
+      window.location.href = "<%= results_path %>";
+    }
+  }
+});
+</script>
