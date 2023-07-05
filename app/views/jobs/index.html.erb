@@ -1,0 +1,13 @@
+<%= render "shared/header" %>
+<div class="job_list">
+  <h2>職業一覧</h2>
+  <% Job.all.each do |job| %>
+    <div class="job">
+      <h3><%= job.name %></h3>
+      <p><%= job.description %></p>
+      <p>適性: <%= job.suitable_for %></p>
+      <p>平均年収: <%= job.average_salary %>円</p>
+    </div>
+  <% end %>
+</div>
+<%= render "shared/footer" %>
