@@ -1,5 +1,41 @@
+<style>
+  /* 職業一覧画面 */
+  .job-list {
+    background-color: #f9f9f9;
+    padding: 50px;
+    text-align: center;
+  }
+
+  .job-list h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .job {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .job h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .job p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+</style>
+
+
 <%= render "shared/header" %>
-<div class="job_list">
+
+<div class="job-list">
   <h2>職業一覧</h2>
   <% Job.all.each do |job| %>
     <div class="job">
@@ -10,4 +46,5 @@
     </div>
   <% end %>
 </div>
+
 <%= render "shared/footer" %>

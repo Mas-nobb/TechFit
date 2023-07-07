@@ -1,20 +1,52 @@
+<style>
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+  }
+
+  .header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .header a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .title {
+    margin-right: 15px;
+  }
+  .job_link {
+    margin-right: 10px;
+  }
+</style>
+
+
 <header>
   <div class="header">
     <div class="title"><%= link_to '/' do %>
     <h1>TechFit</h1>
     <% end %>
     </div>
-    <div class="wrapper">
+
       <div class="job_link">
         <%= link_to jobs_path do %>
-    <h1>職業一覧</h1>
+    職業一覧
     <% end %>
       </div>
       <div class="cord_link">
-        <%= link_to '/' do %>
-    <h1>コード体験</h1>
+        <%= link_to tests_path do %>
+    コード体験
     <% end %>
-      </div>
     </div>
   </div>
 </header>

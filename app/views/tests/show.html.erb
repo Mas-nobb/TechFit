@@ -1,0 +1,45 @@
+<h1><%= @test.name %></h1>
+<p><%= @test.description %></p>
+
+<div class="code-editor">
+  <h2>コード体験</h2>
+  <textarea id="code-textarea"></textarea>
+  <button id="run-button">実行</button>
+  <div id="output">ここに反映されます</div>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    // CodeMirrorの初期化
+    const codeTextarea = document.getElementById("code-textarea");
+    if (codeTextarea.getAttribute("data-initialized") !== "true") {
+      codeTextarea.setAttribute("data-initialized", "true");
+      const codeEditor = CodeMirror.fromTextArea(codeTextarea, {
+        lineNumbers: true,
+        mode: "htmlmixed"
+      });
+
+      // 実行ボタンのクリックイベントハンドラ
+      const runButton = document.getElementById("run-button");
+      runButton.addEventListener("click", function() {
+        const code = codeEditor.getValue();
+
+        // 実行処理（ここではiframeを使ってコードを評価しています）
+        try {
+          const iframe = document.createElement("iframe");
+          iframe.style.display = "none";
+          document.body.appendChild(iframe);
+          const outputElement = iframe.contentDocument.createElement("div");
+          iframe.contentDocument.body.appendChild(outputElement);
+          outputElement.innerHTML = code;
+          const result = outputElement.innerHTML;
+          document.getElementById("output").innerHTML = result;
+          document.body.removeChild(iframe);
+        } catch (error) {
+          document.getElementById("output").textContent = "エラー: " + error.message;
+          return;
+        }
+      });
+    }
+  });
+</script>

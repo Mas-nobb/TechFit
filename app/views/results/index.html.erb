@@ -1,56 +1,90 @@
-<%= render "shared/header" %>
-<h1>適性診断結果</h1>
+<style>
+  /* 診断結果画面 */
+  .result {
+    background-color: #f9f9f9;
+    padding: 50px;
+    text-align: center;
+    height: calc(100vh - 200px);
+    flex: 1 0 auto;
+  }
 
-<p id="result"></p>
-  <%= render 'shared/footer'%>
+  .result h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .result p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .result #result-container {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  .result #result-job {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+.other {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+</style>
+
+<%= render "shared/header" %>
+<div class="result">
+  <h1>適性診断結果</h1>
+
+  <div id="result-container">
+    <p id="result"></p>
+    <p id="result-job"></p>
+  </div>
+  <div class=other>
+    <%= link_to "他の職業もみる", jobs_path %>
+  </div>
+</div>
+<%= render 'shared/footer'%>
 
 <script>
 window.onload = function() {
   const scores = calculateScores();
-  const maxScoreJob = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+  const maxScore = Math.max(...Object.values(scores));
+  const maxScoreJobs = Object.keys(scores).filter(job => scores[job] === maxScore);
 
   const resultElement = document.getElementById("result");
-  resultElement.textContent = `あなたに最も適している職業は${maxScoreJob}です！`;
+  const resultJobElement = document.getElementById("result-job");
+
+  if (maxScoreJobs.length === 1) {
+    resultElement.textContent = `あなたに最も適している職業は${maxScoreJobs[0]}です！`;
+  } else {
+    const lastJob = maxScoreJobs.pop();
+    const jobsString = maxScoreJobs.join('、') + 'と' + lastJob;
+    resultElement.textContent = `あなたに適性がある職業は、`;
+    resultJobElement.textContent = `${jobsString}です。`;
+  }
 
   function calculateScores() {
     const scores = {
-      "ソフトウェア開発者/エンジニア": 0,
-      "データサイエンティスト/アナリスト": 0,
-      "ITコンサルタント": 0,
-      "システム管理者/ネットワークエンジニア": 0,
-      "サイバーセキュリティアナリスト": 0,
-      "UX/UIデザイナー": 0,
-      "プロジェクトマネージャ": 0,
+      "ソフトウェア開発者/エンジニア": parseInt(localStorage.getItem('question_0'), 10),
+      "システム管理者/ネットワークエンジニア": parseInt(localStorage.getItem('question_1'), 10),
+      "データサイエンティスト/アナリスト": parseInt(localStorage.getItem('question_2'), 10),
+      "UX/UIデザイナー": parseInt(localStorage.getItem('question_3'), 10),
+      "プロジェクトマネージャ": parseInt(localStorage.getItem('question_4'), 10),
+      "ITコンサルタント": parseInt(localStorage.getItem('question_5'), 10),
+      "サイバーセキュリティアナリスト": parseInt(localStorage.getItem('question_6'), 10)
     };
-
-    for (let i = 0; i < 6; i++) {
-      const key = `question_${i}`;
-      const score = parseInt(localStorage.getItem(key), 10);
-
-      switch (i) {
-        case 0:
-        case 1:
-        case 5:
-          scores["ソフトウェア開発者/エンジニア"] += score;
-          scores["システム管理者/ネットワークエンジニア"] += score;
-          scores["サイバーセキュリティアナリスト"] += score;
-          break;
-        case 2:
-          scores["データサイエンティスト/アナリスト"] += score;
-          scores["ITコンサルタント"] += score;
-          break;
-        case 3:
-          scores["UX/UIデザイナー"] += score;
-          scores["ソフトウェア開発者/エンジニア"] += score;
-          break;
-        case 4:
-          scores["プロジェクトマネージャ"] += score;
-          scores["ITコンサルタント"] += score;
-          break;
-      }
-    }
 
     return scores;
   }
 };
 </script>
+
+
