@@ -70,3 +70,10 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem 'activeadmin'
+gem 'devise'
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+
+gem "sassc", "~> 2.4"
