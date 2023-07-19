@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :quizzes, only: [:index]
   resources :jobs, only: [:index]
   resources :cords, only: [:index]
-  resources :tests, only: [:index, :show]
   get '/results', to: 'results#index', as: 'results'
+  resources :courses do
+    resources :lessons, only: [:show]
+  end
 end

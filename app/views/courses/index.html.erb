@@ -1,0 +1,70 @@
+<style>
+  .course-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  .course {
+    width: calc(50% - 10px);
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .course h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .course p {
+    margin-bottom: 10px;
+  }
+
+  .course .lesson-list {
+    margin-top: 10px;
+  }
+
+  .course .lesson-list ul {
+    padding-left: 20px;
+  }
+
+  .course .lesson-list li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    list-style-type: square;
+  }
+
+  .course-container {
+    padding: 20px;
+    border-radius: 10px;
+  }
+</style>
+
+<div class="course-container">
+  <% @courses.each_slice(2) do |course_group| %>
+    <div class="course-group">
+      <% course_group.each do |course| %>
+        <div class="course">
+          <h2><%= course.name %></h2>
+          <p><%= course.description %></p>
+
+          <% if course.lessons.any? %>
+            <div class="lesson-list">
+              <ul>
+                <% course.lessons.each do |lesson| %>
+                  <li><%= link_to lesson.category, course_path(course) %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% else %>
+            <p>No lessons available.</p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

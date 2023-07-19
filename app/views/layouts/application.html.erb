@@ -13,7 +13,21 @@
     <%= javascript_importmap_tags %>
   </head>
 
+  <style>
+  .main-content {
+    flex: 1 0 auto;
+     background-color: #f4f9f9;
+  }
+  </style>
+
   <body>
-    <%= yield %>
+    <%= render "shared/header" %>
+    
+    <div class="main-content">
+      <%= yield %>
+    </div>
+
+    <%= render 'shared/footer'%>
   </body>
 </html>
+

@@ -1,0 +1,60 @@
+<style>
+  .course-details {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 5px;
+    width: 80%;
+  }
+
+  .course-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .course-details p {
+    margin-bottom: 10px;
+  }
+
+  .lesson-list {
+    margin-top: 20px;
+  }
+
+  .lesson-list h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .lesson-list .lesson {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .lesson-list .lesson h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .lesson-list .lesson p {
+    margin-bottom: 10px;
+  }
+</style>
+
+<div class="course-details">
+  <h2><%= @course.name %></h2>
+  <p><%= @course.description %></p>
+
+  <div class="lesson-list">
+    <h2>Lessons</h2>
+
+    <% @lessons.each do |lesson| %>
+      <div class="lesson">
+        <h3><%= link_to lesson.title, course_lesson_path(@course, lesson) %></h3>
+        <p><%= lesson.description %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

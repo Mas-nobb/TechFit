@@ -1,7 +1,6 @@
 <style>
   /* 診断結果画面 */
   .result {
-    background-color: #f9f9f9;
     padding: 50px;
     text-align: center;
     height: calc(100vh - 200px);
@@ -39,7 +38,6 @@
 
 </style>
 
-<%= render "shared/header" %>
 <div class="result">
   <h1>適性診断結果</h1>
 
@@ -51,7 +49,7 @@
     <%= link_to "他の職業もみる", jobs_path %>
   </div>
 </div>
-<%= render 'shared/footer'%>
+
 
 <script>
 window.onload = function() {

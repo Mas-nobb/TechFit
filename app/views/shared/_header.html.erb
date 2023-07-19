@@ -1,8 +1,8 @@
 <style>
 header {
-    background-color: #333;
+    background-color: #007a8c;
     color: #fff;
-    padding: 20px;
+    padding: 10px;
   }
 
   .header {
@@ -13,7 +13,6 @@ header {
   .header h1 {
     font-size: 24px;
     font-weight: bold;
-    text-decoration: none;
     color: #fff;
   }
 
@@ -25,7 +24,7 @@ header {
   .title {
     margin-right: 15px;
   }
-  .job_link {
+  .link {
     margin-right: 10px;
   }
 </style>
@@ -38,13 +37,19 @@ header {
     <% end %>
     </div>
 
-      <div class="job_link">
+          <div class="link">
+        <%= link_to quizzes_path do %>
+    適性診断
+    <% end %>
+      </div>
+
+      <div class="link">
         <%= link_to jobs_path do %>
     職業一覧
     <% end %>
       </div>
-      <div class="cord_link">
-        <%= link_to tests_path do %>
+      <div class="link">
+        <%= link_to courses_path do %>
     コード体験
     <% end %>
     </div>
