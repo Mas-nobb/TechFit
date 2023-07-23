@@ -50,6 +50,8 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
   database: TechFit_production
   username: TechFit
   password: <%= ENV["TECHFIT_DATABASE_PASSWORD"] %>
