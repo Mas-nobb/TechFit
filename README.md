@@ -1,24 +1,45 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# アプリケーション名
 
-Things you may want to cover:
+[TechFit]
 
-* Ruby version
+## アプリケーション概要
 
-* System dependencies
+[IT関連に興味がある人が、適性診断やコード体験できる]
 
-* Configuration
+## URL
 
-* Database creation
+[https://techfit.onrender.com/]
 
-* Database initialization
+## テスト用アカウント
 
-* How to run the test suite
+[Basic認証,ID:admin/Pass:2222]
 
-* Services (job queues, cache servers, search engines, etc.)
+## 利用方法
 
-* Deployment instructions
+[適性診断、職業一覧、コード体験、の中から自分のやりたい項目を選択し体験する]
 
-* ...
+## アプリケーションを作成した背景
+
+[たくさんのIT関連の職業があり、自分はどれに向いているかわからなかったことがありました。適性診断を受けたり、プログラミングを体験することで、この課題を解決させたいと思ったからです。]
+
+## 洗い出した要件
+
+[要件定義をまとめたスプレッドシートのリンクを記載]
+
+## 実装した機能についての画像やGIFおよびその説明
+
+[実装した機能について、それぞれどのような特徴があるのかを列挙する形で記載。画像はGyazoで、GIFはGyazoGIFで撮影すること]
+
+## 開発環境
+
+[使用した言語,HTML,CSS,JS,ruby]
+
+## ローカルでの動作方法
+
+[管理者画面へはlocalhost3000/admin]
+
+## 工夫したポイント
+
+[active_adminを使用し、管理画面からレッスンやコースを作成できるようにした。]
