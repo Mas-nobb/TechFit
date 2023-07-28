@@ -53,7 +53,11 @@
         </video>
       </div>
       <div class="lesson-editor">
-        <textarea id="code-editor" rows="10" cols="30"><h1>hallow world</h1></textarea>
+        <textarea id="code-editor" rows="10" cols="30">
+          <h1>hallow world</h1>
+          <h2>お疲れ様でした</h2>
+          <div class="box" style="width: 100px; height: 100px; background-color: pink; font-size: 16px;"></div>
+          </textarea>
         <button onclick="runCode()">Run Code</button>
       </div>
     <% end %>
@@ -68,6 +72,7 @@
 function runCode() {
   const code = document.getElementById('code-editor').value;
   const iframe = document.getElementById('output');
-  iframe.src = "data:text/html;charset=utf-8," + escape(code);
+  iframe.src = "data:text/html;charset=utf-8," + encodeURIComponent(code);
 }
 </script>
+
